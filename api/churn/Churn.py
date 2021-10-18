@@ -63,8 +63,7 @@ class Churn(object):
         # target encode - age_group
         data.loc[:, 'age_group'] = data.loc[:, 'age_group'].map(self.target_encode_age_group)
 
-        selected_cols =['credit_score',
-                        'age_bins',
+        selected_cols =['age_bins',
                         'gender',
                         'age',
                         'num_of_products',
