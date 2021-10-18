@@ -5,15 +5,14 @@ from churn.Churn import Churn
 
 
 # load model
-path = '/home/cid/repos/churn-prediction/src/models/'
-model = pickle.load( open(path + 'model_rf.pkl', 'rb') )
+model = pickle.load( open('/home/cid/repos/churn-prediction/src/models/model_rf.pkl', 'rb') )
 
 app = Flask(__name__)
 
 # endpoint
 @app.route('/churn/predict', methods=['POST'])
 def churn_predict():
-    test_json = request.get_json()
+    test_json = request.get_json()    
     
     if test_json:
         if isinstance(test_json, dict):
@@ -29,12 +28,11 @@ def churn_predict():
         # prediction 
         df_response = pipeline.get_prediction(model, test_raw, df1)
         
-        return df_response       
-        
+        return df_response
+
         
     else:
         return Response('{}', status=200, mimetype='aplication/json')
-    
 
 if __name__ == '__main__':
     app.run('0.0.0.0')
